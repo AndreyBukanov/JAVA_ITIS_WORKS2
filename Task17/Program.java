@@ -31,21 +31,21 @@ class Program {
 		}
 	}
 
-	public static void printMinInLine(int matrix[][]) {
+	public static void printMinInColumn(int matrix[][]) {
 
-		for (int i=0; i <  matrix.length; i++) {
+		for (int i=0; i < matrix[0].length; i++) {
+
+			int minInColumn = matrix[0][i];
+
+			for (int j=1; j < matrix.length; j++) {
 			
-			int minValInLine = matrix[i][0];
+				if (matrix[j][i] < minInColumn) {
 
-			for (int j=1; j < matrix[i].length ; j++) {
-
-				if (matrix[i][j] < minValInLine) {
-
-					minValInLine = matrix[i][j];
-				}
+					minInColumn = matrix[j][i];
+				}	
 			}
 
-			System.out.printf("%d ", minValInLine);
+			System.out.printf("%d ", minInColumn);
 		}
 
 		System.out.printf("\n");
@@ -57,6 +57,6 @@ class Program {
 
 		fillMatrixRandom(matrix);
 		printMatrix(matrix);
-		printMinInLine(matrix);
+		printMinInColumn(matrix);
 	}
 }
