@@ -41,7 +41,9 @@ class Human {
 
 	Human (String newName, int newAge) {
 		
-		age = newAge;
-		name = newName;
+		//age = newAge;
+		//name = newName;
+		setName(newName);
+		setAge(newAge);
 	}
 }
