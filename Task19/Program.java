@@ -16,7 +16,7 @@ class Program {
 		else {
 
 			memory[n-1] = fibRequrse(n-1, memory) + memory[n-3];			
-		}
+		}	
 
 		return memory[n-1];
 		

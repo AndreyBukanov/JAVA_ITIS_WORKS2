@@ -1,0 +1,269 @@
+		// TransportQueue queue = new TransportQueue();
+	
+		// for (int i=0; i < 10; i++) {
+
+		// 	Transport transport = new Transport(i + " " + i + " " + i);
+		// 	TransportNode transportNode = new TransportNode(transport);
+			
+		// 	queue.enqueue(transportNode);
+		// 	queue.printQueue();
+		// }
+
+		// for (int i=0; i < 10; i++) {
+
+		// 	TransportNode transportNode;
+
+		// 	transportNode = queue.dequeue();
+		// 	queue.printQueue();
+		// }
+
+		//================================================================
+
+		ParkingPlace parking = new ParkingPlace(PARKING_SIZE);
+
+
+		for (int i=0; i<PARKING_SIZE + 1; i++) {
+			
+			Transport transport = new Transport("x"+ i + i + i + "xx116");
+			transport.come(parking);
+		}
+
+		TransportQueue inputQueue = parking.getInputQueue();
+
+		inputQueue.printQueue();
+
+
+		for (int i=0; i<PARKING_SIZE + 1; i++) {
+
+			TransportNode node = inputQueue.dequeue();
+			Transport transport = node.getTransport();
+			System.out.printf("%s\n", transport.numberToString());
+		}
+
+
+		// for (int i=0; i<PARKING_SIZE + 1; i++) {
+		
+		// 	System.out.printf("\nStep #%d\n", i);
+
+		// 	System.out.printf("Parking Array:\n");
+		// 	parking.nextStep();
+		// 	parking.printParkingArray();
+
+		// 	System.out.printf("Input Queue:\n");
+		// 	inputQueue.printQueue();
+
+		// }
+
+				TransportQueue queue = new TransportQueue();
+	
+		for (int i=0; i < 10; i++) {
+
+			Transport transport = new Transport(i + " " + i + " " + i);
+			TransportNode transportNode = new TransportNode(transport);
+			
+			queue.enqueue(transportNode);
+			queue.printQueue();
+		}
+
+		for (int i=0; i < 10; i++) {
+
+			TransportNode transportNode = queue.dequeue();
+
+			Transport transport = transportNode.getTransport();
+
+			System.out.printf("%s\n", transport.numberToString());
+			queue.printQueue();
+		}
+
+
+//make new parking place
+	ParkingPlace parking = new ParkingPlace(PARKING_SIZE);
+
+	//make some transport && add to poarking's input queue
+	for (int i=0; i < 10; i++) {
+		
+		Transport newTransport = new Transport("x" + i + i + i + "xx");
+		newTransport.come(parking);
+	}
+
+	//show parking's input queue
+	TransportQueue inputQueue = parking.getInputQueue();
+	inputQueue.printQueue();
+
+	TransportQueue outputQueue = parking.getOutputQueue();
+	outputQueue.printQueue();
+
+
+	System.out.printf("\n");
+
+
+	for (int i=0; i < 10; i++) {
+
+		System.out.printf("\nStep #%d\n", i);
+		parking.nextStep();
+
+
+		System.out.printf("Input Queue:\n");
+		inputQueue.printQueue();
+		
+
+		System.out.printf("Parking Array:\n");
+		parking.printParkingArray();
+
+
+		System.out.printf("Output Queue:\n");
+		outputQueue.printQueue();
+
+	}
+
+	//LEAVE
+	//=======================
+	Transport transportToLeave = parking.getTransport("x222xx");
+
+	transportToLeave.leave(parking);
+
+	System.out.printf("\nStep \"Want to leave\"\n");
+	parking.nextStep();
+
+
+	System.out.printf("Input Queue:\n");
+	inputQueue.printQueue();
+		
+
+	System.out.printf("Parking Array:\n");
+	parking.printParkingArray();
+
+
+	System.out.printf("Output Queue:\n");
+	outputQueue.printQueue();
+
+	//COME
+	//=======================
+	Transport transportToCome = new Transport("y123yy");
+
+	transportToCome.come(parking);
+
+	System.out.printf("\nStep \"Want to Come\"\n");
+	parking.nextStep();
+
+
+	System.out.printf("Input Queue:\n");
+	inputQueue.printQueue();
+		
+
+	System.out.printf("Parking Array:\n");
+	parking.printParkingArray();
+
+
+	System.out.printf("Output Queue:\n");
+	outputQueue.printQueue();
+
+	//Anower Step
+	//=======================
+
+	System.out.printf("\nStep \"AnowerB\"\n");
+	parking.nextStep();
+
+
+	System.out.printf("Input Queue:\n");
+	inputQueue.printQueue();
+		
+
+	System.out.printf("Parking Array:\n");
+	parking.printParkingArray();
+
+
+	System.out.printf("Output Queue:\n");
+	outputQueue.printQueue();
+private TransportNode head;
+	private TransportNode tail;
+	private int counter;
+	//private int size;
+
+
+	TransportQueue () {
+		this.head = null;
+		this.tail = null;
+		this.counter = 0;
+	}//end of TransportQueue ()
+
+	private TransportNode getPreLastNode() {
+
+		TransportNode retNode = this.head;
+
+		for (int i=0; i < counter-1; i++) {
+	
+			retNode = retNode.getNextNode();
+
+		}
+
+		return retNode;
+
+	};//end of getPreLastNode()
+
+	public void enqueue(TransportNode transportNode) {
+		
+		switch (counter) {
+			
+			case 0:
+				transportNode.setNextNode(null);
+				this.head = transportNode;
+				this.tail = transportNode;
+				break;
+			
+			default:
+				transportNode.setNextNode(this.head);
+				this.head = transportNode;
+				break;
+		}
+	
+		counter++;
+	
+	}//end of enqueue();
+
+	public TransportNode dequeue() {
+		
+		TransportNode retNode;
+
+		switch (counter) {
+
+			case 0:
+				retNode = null;
+				break;
+
+			case 1:
+				retNode = this.head;
+				this.head = null;
+				this.tail = null;
+				break;
+
+			default:
+				retNode = this.tail;
+				this.tail = getPreLastNode();
+				this.tail.setNextNode(null);
+				break;
+
+		}
+
+		counter--;
+
+		return retNode;
+
+	}//end of dequeue();
+
+
+	public void printQueue() {//TODO: String toString();
+
+		TransportNode nodeToPrint = this.head;
+
+		for (int i=0; i < counter; i++) {
+			
+			Transport transport = nodeToPrint.getTransport();
+
+			System.out.printf("[%s] ", transport.numberToString());
+
+			nodeToPrint = nodeToPrint.getNextNode();
+		}
+
+		System.out.printf("\n");
+	};//end of printQueue()
