@@ -1,67 +1,35 @@
+public class HumanNode	{
 
-public class HumanNode {
-    
-
-    private Human     human;
-    private HumanNode nextNode;
-
-    
-    public HumanNode() {
-        
-        this.human = null;
-        this.nextNode = null;
-    
-    }//end of HumanNode Construct
-
-    public HumanNode(Human human) {
-        
-        this.human = human;
-        this.nextNode = null;
-    
-    }//end of HumanNode Construct
-
-    public HumanNode(Human human, HumanNode nextNode) {
-        
-        this.human = human;
-        this.nextNode = nextNode;
-    
-    }//end of HumanNode Construct
-
-    public HumanNode(String humanName, int humanAge) {
-        
-        Human human = new Human(humanName, humanAge);
-
-        this.human = human;
-        this.nextNode = null;
-    
-    }//end of HumanNode Construct
+	private Human     human;
+	private HumanNode nextNode;
 
 
+	HumanNode () {
+		this.human = null;
+		this.nextNode  = null; 
+	}//end of HumanNode ()
 
-    public Human getHuman() {
-        
-        return this.human;    
-    
-    }//end of getHuman()
-
-
-    public HumanNode getNextNode() {
-        
-        return this.nextNode;
-    
-    }//end of getNextNode()
+	HumanNode (Human human) {
+		this.human = human;
+		this.nextNode  = null; 
+	}//end of HumanNode ()
 
 
-    public void setNextNode(HumanNode nextNode) {
+	public void setNextNode(HumanNode nextNode) {
+		this.nextNode = nextNode;
+	}//end of setNextNode();
 
-        this.nextNode = nextNode;
+	public void setHuman(Human human) {
+		this.human = human;
+	}//end of setHuman();
 
-    }//end of setNextNode()
 
-    public void setHuman(Human newHuman) {
+	public Human getHuman() {
+		return this.human;
+	};//end of getHuman()
 
-        this.human = newHuman;
+	public HumanNode getNextNode() {
+		return this.nextNode;
+	};//end of getNextNode()
 
-    }//end of setNextNode()
-
-}//end of HumanNode Class
+}//end of HumanNode class

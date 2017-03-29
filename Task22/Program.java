@@ -1,29 +1,65 @@
 class Program {
 
+	private static final int QUEUE_SIZE = 5;
+	private static final int STACK_SIZE = 10;
+
+
 	public static void main(String args[]) {
 
-		// HumanNode humanNode1 = new HumanNode("Human A", 1);
-		// HumanNode humanNode2 = new HumanNode("Human B", 2);
-		// HumanNode humanNode3 = new HumanNode("Human C", 3);
+		//===================================================
+		System.out.printf("\nQUEUE:\n\n");
 
+		HumanQueue queue = new HumanQueue();
 
-		// humanNode1.setNextNode(humanNode2);
-		// humanNode2.setNextNode(humanNode3);
+		for (int i=0;i<QUEUE_SIZE*2;i++) {
+			
+			Human humanIN = new Human("Human"+i, i*10+1);
+			System.out.printf("Enqueue New: <%s>\n", humanIN.toString());
+			HumanNode humanNodeIN = new HumanNode(humanIN);
 
+			queue.enqueue(humanNodeIN);
+			queue.printQueue();
 
-		// HumanNode currentNode = humanNode1;
+			if (queue.getCounter() >= QUEUE_SIZE) {
 
-		// while (currentNode != null) {
+				HumanNode humanNodeOUT = queue.dequeue();
+				Human humanOUT = humanNodeOUT.getHuman();
+				System.out.printf("Dequeue Next: <%s>\n", humanOUT.toString());
+			}
 
-		// 	Human currentHuman = currentNode.getHuman();
-
-		// 	System.out.printf("%s\n", currentHuman.toString());
-
-		// 	currentNode = currentNode.getNextNode();
-
-		// };
-
+			System.out.printf("\n");
 		
+		}//end of for
+
+		//===================================================
+		System.out.printf("\nSTACK:\n\n");
+
+		HumanStack stack = new HumanStack();
+
+		for (int i=0;i<STACK_SIZE;i++) {
+
+			Human humanIN = new Human("Human"+i, i*10+1);
+			System.out.printf("Push New: <%s>\n", humanIN.toString());
+			HumanNode humanNodeIN = new HumanNode(humanIN);
+
+			stack.push(humanNodeIN);
+			stack.printStack();
+
+			System.out.printf("\n");
+			
+		}
+
+		for (int i=0;i<STACK_SIZE;i++) {
+
+			HumanNode humanNodeOUT = stack.pop();
+			Human humanOUT = humanNodeOUT.getHuman();
+
+			stack.printStack();
+			System.out.printf("Was POPed: <%s>\n", humanOUT.toString()); 
+
+			System.out.printf("\n");
+			
+		}
 
 	}//end of main()	
 
